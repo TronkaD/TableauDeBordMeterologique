@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Tableau de Bord Météorologique</title>
+    <script src="dist/bundle.js" defer></script>
+</head>
+<body>
+    <div class="big-container">
+        <header>
+            <div class="header-container">
+                <div class="title">
+                    <h3>Tableau de bord météorologique</h3>
+                </div>
+                <div class="input-search">
+                    <input type="search" name="search" id="input-search" placeholder="Rechercher une ville ......">
+                    <button type="button" id="search-button">Recherche</button>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="grid-container">
+                <div id="loading" class="hidden">Chargement ..............</div>
+                <div id="error" class="hidden">Une erreur est survenue. Veuillez réessayer.</div>
+                <div class="item" id="currentWeather">
+                    <div class="container-title-para">
+                        <h3>Météo actuelle</h3>
+                        <div id="currentWeath">
+                        </div>
+                    </div>
+                </div>
+                <div class="item" id="forecastWeather">
+                    <h3 id="forecast">Prévisions</h3>
+                    <div>
+                        <div id="forecastOfFourDay">
+                        </div>  
+                    </div>
+                </div>
+                <div class="item" id="airQuality">
+                    <h3 id="air">Pollution de l'air</h3>
+                    <div id="currentAirQuality">
+                    </div>
+                </div>
+            </div>
+        </main>
+       <footer>
+            <p>&copy;2024 weather dashboard</p>
+        </footer>  
+    </div>
+</body>
+</html>
