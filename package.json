@@ -1,26 +1,24 @@
 {
-  "name": "weather-dashboard",
+  "name": "projet1",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Tableau de bord meterologique",
+  "main": "bundle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "lint": "eslint .",
-    "format": "prettier --write ."
+    "lint": "eslint --ext .js",
+    "lint:fix": "eslint --ext .js --fix",
+    "build": "webpack"
   },
-  "keywords": [],
-  "author": "",
+  "author": "DIABATE Tronka",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "@babel/core": "^7.25.2",
-    "@babel/preset-env": "^7.25.3",
-    "@eslint/js": "^9.9.0",
+    "@babel/preset-env": "^7.25.4",
     "babel-loader": "^9.1.3",
-    "eslint": "^9.9.0",
-    "globals": "^15.9.0",
-    "prettier": "^3.3.3",
-    "webpack": "^5.93.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4"
   }
 }
