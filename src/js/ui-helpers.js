@@ -1,3 +1,47 @@
+/** START -- {MANAGING DATA LOADS}*/
+
+/**
+ *  Set loader for weather details
+ */
+const setWeatherLoader = (isLoading) => {
+    const weatherDetailsDiv = document.getElementById('weather-detail');
+
+    if(isLoading){
+        weatherDetailsDiv.innerHTML = `<div class="loader"></div>`;
+    }else{
+        weatherDetailsDiv.innerHTML = "";
+    }
+    return;
+}
+/**
+ * Set loader for forecast details
+ */
+const setForecastLoader = (isLoading) => {
+    const forecastDetailsDiv = document.getElementById("forecast-detail");
+    if(isLoading){
+        forecastDetailsDiv.innerHTML = `<div class="loader"></div>`;
+    }else{
+        forecastDetailsDiv.innerHTML = "";
+    }
+    return;
+}
+/**
+ * Set loader for air pollution details
+ */
+const setAirPollutionLoader = (isLoading) => {
+    const airPollutionDetailsDiv = document.getElementById("air-pollution-detail");
+    if(isLoading){
+        airPollutionDetailsDiv.innerHTML = `<div class="loader"></div>`;
+    }else{
+        airPollutionDetailsDiv.innerHTML = "";
+    }
+    return;
+}
+
+/**END -- {MANAGING DATA LOADS} */
+
+/** START -- {ERROR MANAGEMENT}*/
+
 /**
  * Handle errors during API fetch or processing
  * @param {string} message --Error message to display
@@ -6,7 +50,6 @@ const handleError = (message) => {
     const errorElementDiv = document.getElementById("error");
     errorElementDiv.textContent = message;
     errorElementDiv.style.display = "block";
-    console.log(message);
 }
 
 /**
@@ -16,12 +59,17 @@ const resetError = () => {
     const errorElementDiv = document.getElementById('error');
     errorElementDiv.textContent = "";
 }
+
+/**END -- {ERROR MANAGEMENT} */
+
+/**START -- {DATA DISPLAY IN THE USER INTERFACE} */
+
 /**
  * Display weather data
  * @param {object} weatherData -- the weather data object.
 */
 const displayWeatherDetails = (weatherDetails) => {
-    console.log(' weather details : ', weatherDetails)
+    
     const weatherDetailsDiv = document.getElementById('weather-detail');
     //clear the previous data
     weatherDetailsDiv.innerHTML = "";
@@ -79,9 +127,7 @@ const displayForecast = (forecastData) => {
         `;
     });
     forecastHTML += `</div> </div>`;
-    forecastDetailsDiv.innerHTML = forecastHTML;
-    console.log('dailyForecasts : ', dailyForecasts);
-    
+    forecastDetailsDiv.innerHTML = forecastHTML;   
 };
 
 /**
@@ -129,4 +175,14 @@ const displayWeather = (weatherData, forecastData, airPollutionData) => {
     }
 };
 
-export {handleError, resetError, displayWeather};
+/**END -- {ERROR DATA DISPLAY IN THE USER INTERFACE} */
+
+
+export {
+    setWeatherLoader, 
+    setForecastLoader, 
+    setAirPollutionLoader,
+    handleError, 
+    resetError, 
+    displayWeather,  
+};

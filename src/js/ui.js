@@ -1,46 +1,17 @@
-import {getGeocodeFromCityName, fetchWeatherByGeocode, fetchForecastGeocode, fetchAirPollutionGeocode} from './api';
-import {handleError, resetError, displayWeather} from './ui-helpers';
-/**
- *  Set loader for weather details
- */
-const setWeatherLoader = (isLoading) => {
-    const weatherDetailsDiv = document.getElementById('weather-detail');
+import {
+    getGeocodeFromCityName, 
+    fetchWeatherByGeocode, 
+    fetchForecastGeocode, 
+    fetchAirPollutionGeocode
+} from './api.js';
 
-    if(isLoading){
-        console.log('loading : ', isLoading);
-        weatherDetailsDiv.innerHTML = `<div class="loader"></div>`;
-    }else{
-     
-        weatherDetailsDiv.innerHTML = "";
-    }
-    return;
-}
-
-/**
- * Set loader for forecast details
- */
-const setForecastLoader = (isLoading) => {
-    const forecastDetailsDiv = document.getElementById("forecast-detail");
-    if(isLoading){
-        forecastDetailsDiv.innerHTML = `<div class="loader"></div>`;
-    }else{
-        forecastDetailsDiv.innerHTML = "";
-    }
-    return;
-}
-
-/**
- * Set loader for forecast details
- */
-const setAirPollutionLoader = (isLoading) => {
-    const airPollutionDetailsDiv = document.getElementById("air-pollution-detail");
-    if(isLoading){
-        airPollutionDetailsDiv.innerHTML = `<div class="loader"></div>`;
-    }else{
-        airPollutionDetailsDiv.innerHTML = "";
-    }
-    return;
-}
+import {
+    handleError, 
+    displayWeather,
+    setWeatherLoader, 
+    setForecastLoader, 
+    setAirPollutionLoader
+} from './ui-helpers.js';
 
 /**
  * Updates the UI with the fetched weather, forecast and air pollution data.
@@ -54,10 +25,7 @@ const updateUI = (weatherData, forecastData, airPollutionData) => {
     setWeatherLoader(false);
     setForecastLoader(false);
     setAirPollutionLoader(false);
-
     displayWeather(weatherData, forecastData, airPollutionData);
-  
-
 }
 
 /**
@@ -84,11 +52,7 @@ const fetchWeatherData = async (city) => {
     const weatherDataPromise = fetchWeatherByGeocode(lat, lon);
     const forecastDataPromise = fetchForecastGeocode(lat, lon);
     const airPollutionDataPromise = fetchAirPollutionGeocode(lat, lon);
-
     const [weatherData, forecastData, airPollutionData] = await Promise.all([weatherDataPromise, forecastDataPromise, airPollutionDataPromise]);
-    
-    console.log(weatherData, forecastData, airPollutionData);
-    console.log(` Latitude : ${lat} | Longitude : ${lon}`);
     //Appeller toute les fonctions pour récuperer la donnée
     updateUI(weatherData, forecastData, airPollutionData);
 }
@@ -112,7 +76,7 @@ const setupEventListeners = () => {
         if(city){
             //get geoloc data
             fetchWeatherData(city);
-        };
+        }
     }
 
     const handleKeyPressSearchInput = (event) => {
@@ -122,7 +86,7 @@ const setupEventListeners = () => {
             if(city){
                 //get geoloc data
                 fetchWeatherData(city);
-            };
+            }
         }
     }
 
@@ -137,4 +101,4 @@ const init = () => {
     setupEventListeners();
 }
 
-export {init, setWeatherLoader, setForecastLoader, setAirPollutionLoader, fetchWeatherData};
+export default init;

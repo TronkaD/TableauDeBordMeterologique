@@ -1,12 +1,17 @@
-import {handleError, resetError, displayWeather} from './ui-helpers';
-import {setupEventListeners, setWeatherLoader, setForecastLoader, setAirPollutionLoader, fetchWeatherData} from './ui'
+import {
+    handleError,
+    setWeatherLoader, 
+    setForecastLoader, 
+    setAirPollutionLoader
+} from './ui-helpers.js';
+
 /**
  * Global variable declaration 
  * Declaration des variables Globale  */
 /* https://api.openweathermap.org/geo/1.0/direct?q=paris&appid=8e96cc80225e961a033630880bcca97d */
-const API_BASE_URL = 'https://api.openweathermap.org';
-const API_KEY = '8e96cc80225e961a033630880bcca97d';
-const EndPointName = {
+const apiBaseUrl = 'https://api.openweathermap.org';
+const apiKey = '8e96cc80225e961a033630880bcca97d';
+const endPointName = {
     geo : "geo/1.0",
     data : "data/2.5"
 }
@@ -20,7 +25,7 @@ const EndPointName = {
  * @returns {promise<object>} --lon {longitude} -->lat {latitude} coordinates
  */
 const getGeocodeFromCityName = async (city) =>{
-    const url = `${API_BASE_URL}/${EndPointName.geo}/direct?q=${city}&appid=${API_KEY}&units=metric`;
+    const url = `${apiBaseUrl}/${endPointName.geo}/direct?q=${city}&appid=${apiKey}&units=metric`;
     try{
         const response = await fetch(url);
         if(!response.ok){
@@ -38,8 +43,8 @@ const getGeocodeFromCityName = async (city) =>{
         const {lat, lon} = firstElement;
         return {lat, lon};
 
-    }catch(err){
-        handleError(err);
+    }catch(error){
+        handleError(error);
         setWeatherLoader(false);
         setForecastLoader(false);
         setAirPollutionLoader(false);
@@ -56,9 +61,8 @@ const getGeocodeFromCityName = async (city) =>{
  * @return {promise<object>} weather data
  */
 const fetchWeatherByGeocode = async (lat, lon) => {
-    const url = `${API_BASE_URL}/${EndPointName.data}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY }&units=metric`;
+    const url = `${apiBaseUrl}/${endPointName.data}/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
     try {
-
         const response = await fetch(url);
         if(!response.ok){
             throw new Error("http satuts ", response.status);
@@ -67,7 +71,7 @@ const fetchWeatherByGeocode = async (lat, lon) => {
         return data
         
     } catch (error) {
-        handleError(err);
+        handleError(error);
         setWeatherLoader(false);
         return null;
     }
@@ -84,17 +88,16 @@ const fetchWeatherByGeocode = async (lat, lon) => {
  */
 
 const fetchForecastGeocode = async (lat , lon) =>{
-    const url = `${API_BASE_URL}/${EndPointName.data}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+    const url = `${apiBaseUrl}/${endPointName.data}/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
     try {
         const response = await fetch(url);
         if(!response.ok){
             throw new Error('http error status', response.status);
         }
         const data = await response.json();
-        return data
-        
+        return data;  
     } catch (error) {
-        handleError(err)
+        handleError(error);
         setForecastLoader(false);
         return null;
     }
@@ -110,7 +113,7 @@ const fetchForecastGeocode = async (lat , lon) =>{
  */
 
 const fetchAirPollutionGeocode = async (lat , lon) =>{
-    const url = `${API_BASE_URL}/${EndPointName.data}/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+    const url = `${apiBaseUrl}/${endPointName.data}/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
     try {
         const response = await fetch(url);
         if(!response.ok){
@@ -120,16 +123,18 @@ const fetchAirPollutionGeocode = async (lat , lon) =>{
         return data
         
     } catch (error) {
-        handleError(err)
+        handleError(error)
         setAirPollutionLoader(false);
         return null;
     }
 }
 
+
 export {
     getGeocodeFromCityName, 
     fetchWeatherByGeocode, 
     fetchForecastGeocode, 
-    fetchAirPollutionGeocode};
+    fetchAirPollutionGeocode
+};
 
 
