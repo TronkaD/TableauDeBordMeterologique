@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="DIABATE Tronka">
+    <title>Tableau de bord métérologique</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script type = "module" src="../dist/bundle.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Tableau de bord métérologique</h1>
+        <form action="" id="search-form">
+            <input type="text" id="search-input" placeholder="Entrer la ville rechercher" aria-label="Entrer la ville recherher">
+            <button type="submit" id="search-button">Rechercher</button>
+        </form>
+    </header>
+    <main>
+        <div id="error">tarlink, le satellite d’Elon Musk, a fait ses débuts en Afrique en janvier 2023, avec le Nigeria comme premier site de lancement. Le fournisseur d’accès Internet par satellite de</div>
+        <section id="current-weather">
+            <h3>Méteo actuelle</h3>
+            <div id="weather-detail" class="container-data"></div>
+        </section>
+        <section id="current-forecast">
+            <h3>Prévision méterologique dans 5 jours</h3>
+            <div id="forecast-detail" class="container-data"></div>
+        </section>
+        <section id="current-air-pollution">
+            <h3>Air pollution</h3>
+            <div id="air-pollution-detail" class="container-data"></div>
+        </section>
+    </main>
+    <footer>
+        <p>Tableau de bord métérologique&copy;2024</p>
+    </footer>
+</body>
+</html>
